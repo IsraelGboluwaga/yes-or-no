@@ -3,7 +3,7 @@ import * as bodyParser from 'body-parser'
 import express from 'express'
 import morgan from 'morgan'
 
-import { mongo } from '../src/config/mongo'
+import { mongo } from './config/mongo'
 import { routes } from './api/routes'
 import { logger } from './config/winston'
 
