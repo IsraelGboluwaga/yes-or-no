@@ -1,6 +1,7 @@
 import { isEmpty } from 'lodash/fp'
-import { Game } from '../models'
+
 import { omitUndefined } from '../lib/helpers'
+import { Game } from '../models'
 
 export interface ICreateGameParams {
   req: any

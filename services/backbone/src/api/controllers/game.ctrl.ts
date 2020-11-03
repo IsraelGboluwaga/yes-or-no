@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
+
 import { logger } from '../../config/winston'
 import { failure, success } from '../lib/response'
-import { ICreateGameParams } from '../services/game.service'
 import { GameService } from '../services'
+import { ICreateGameParams } from '../services/game.service'
 
 const { createGame, getGame, update } = GameService
 

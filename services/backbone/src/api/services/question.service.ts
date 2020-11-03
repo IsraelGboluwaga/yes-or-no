@@ -1,7 +1,8 @@
 import { isEmpty } from 'lodash/fp'
-import { IQuestion, IQuestionOnly, Question } from '../models/Question'
+
 import { omitUndefined } from '../lib/helpers'
 import { Game } from '../models'
+import { IQuestionOnly, Question } from '../models/Question'
 
 const createQuestion = async (args: IQuestionOnly) => {
   const { game_id: gameId, text, answer } = args

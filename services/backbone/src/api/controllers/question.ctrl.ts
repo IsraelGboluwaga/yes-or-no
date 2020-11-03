@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+
 import { logger } from '../../config/winston'
 import { failure, success } from '../lib/response'
 import { IQuestionOnly } from '../models/Question'
@@ -10,7 +11,7 @@ const askQuestion = async (req: Request, res: Response) => {
   const { game_id, text, answer }: IQuestionOnly = req.body
   try {
     const data = await createQuestion({ game_id, text, answer })
-    return success({ res, data, httpCode: 201})
+    return success({ res, data, httpCode: 201 })
   } catch (err) {
     logger.error(err)
     return failure({

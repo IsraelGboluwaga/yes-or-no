@@ -2,11 +2,11 @@ import '../../setup/envConfig'
 
 import * as express from 'express'
 
-import { AuthController, GameController, QuestionController, UserController  } from './controllers'
+import { AuthController, GameController, QuestionController, UserController } from './controllers'
 const { authenticateUser } = AuthController
 const { register, login } = UserController
 const { createGameInstance, fetchGame, updateGameProperty } = GameController
-const { askQuestion, getQuestion,updateQuestion } = QuestionController
+const { askQuestion, getQuestion, updateQuestion } = QuestionController
 
 const routes = (app: express.Router) => {
   app.get('/', (req: express.Request, res: express.Response) =>
@@ -26,7 +26,7 @@ const routes = (app: express.Router) => {
   app.post('/question', authenticateUser, askQuestion)
   app.get('/question/:_id', authenticateUser, getQuestion)
   app.patch('/question', authenticateUser, updateQuestion)
-  
+
   return app
 }
 

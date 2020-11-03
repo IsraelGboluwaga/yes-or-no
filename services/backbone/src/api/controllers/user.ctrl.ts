@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import { logger } from '../../config/winston'
 
+import { logger } from '../../config/winston'
 import { failure, success } from '../lib/response'
 import { IUserOnly } from '../models/User'
 import { UserService } from '../services'
