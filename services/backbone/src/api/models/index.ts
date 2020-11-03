@@ -1,3 +1,5 @@
+import { Game } from './Game'
+import { Question } from './Question'
 import { User } from './User'
 
-export { User }
+export { Game, Question, User }

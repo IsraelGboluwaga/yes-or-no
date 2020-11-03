@@ -17,7 +17,7 @@ const authenticateUser = async (req: Request, res: Response, next: NextFunction)
       return failure({ res, message: 'You do not have access to this resource', httpCode: 403 })
     }
     ;(req as any).user = user
-    next()
+    return next()
   } catch (err) {
     logger.error(err)
     return failure({
