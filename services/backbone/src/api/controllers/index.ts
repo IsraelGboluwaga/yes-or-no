@@ -1,3 +1,4 @@
+import * as AuthController from './auth.ctrl'
 import * as UserController from './user.ctrl'
 
-export {  UserController }
+export { AuthController, UserController }

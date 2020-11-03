@@ -12,12 +12,14 @@ interface IData {
 
 interface IRespond {
   res: express.Response
+  status: boolean
   data: IData
   httpCode: number
 }
 
-function respond({ res, httpCode, data }: IRespond) {
+function respond({ res, status, httpCode, data }: IRespond) {
   const response = {
+    status,
     data: data.data,
     message: data.message,
   }
@@ -40,7 +42,7 @@ export const success = ({ res, data, message, httpCode }: ISuccess) => {
     data,
     message: message || SUCCESSFUL,
   }
-  respond({ res, httpCode, data: dataToSend })
+  return respond({ res, status: true, httpCode, data: dataToSend })
 }
 
 interface IFail {
@@ -54,5 +56,5 @@ export const failure = ({ res, message, errStack, httpCode }: IFail) => {
     message,
     errStack,
   }
-  respond({ res, httpCode, data: dataToSend })
+  return respond({ res, status: false, httpCode, data: dataToSend })
 }

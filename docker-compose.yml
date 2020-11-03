@@ -17,11 +17,11 @@ services:
     volumes:
       - ./services/backbone:/app/backbone
 
-  chatty:
-    build: ./services/chatty
+  chatty-ui:
+    build: ./services/chatty-ui
     ports:
       - "80:80"
-    container_name: chatty
+    container_name: chatty-ui
     stdin_open: true
     volumes:
-      - ./services/chatty:/app/chatty
+      - ./services/chatty-ui:/app/chatty-ui

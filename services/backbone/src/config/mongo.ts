@@ -26,6 +26,7 @@ const mongo = () =>
       })
     })
     .catch((err) => {
+      logger.info('conn string =>', connectionString)
       logger.error(`Mongo Connection Error: ${err}`)
       process.exit(1)
     })

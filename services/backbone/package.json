@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "dev": "NODE_ENV=development ts-node-dev --transpile-only ./setup/www.ts",
+    "dev": "NODE_ENV=development ts-node-dev --transpile-only --exit-child ./setup/www.ts",
     "build": "NODE_ENV=production tsc -p tsconfig.json",
     "lint:fix": "prettier --write '*/**/*.{js,ts,tsx,jsx}' && eslint --quiet --cache --fix '*/**/*.{js,ts,tsx}'",
     "precommit": "lint-staged",
@@ -65,6 +65,7 @@
     "ts-node-dev": "^1.0.0-pre.49",
     "tsc-watch": "^4.2.9",
     "typescript": "^3.9.5",
+    "validator": "^13.1.17",
     "winston": "2.4.0"
   },
   "engines": {
