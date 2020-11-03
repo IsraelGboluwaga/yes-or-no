@@ -1,5 +1,6 @@
 import { Request } from 'express'
 import { isAlphanumeric } from 'validator'
+
 import { logger } from '../../config/winston'
 import { IUser, IUserOnly, User } from '../models/User'
 import { comparePasswords, generateToken, hashPassword } from './auth.service'

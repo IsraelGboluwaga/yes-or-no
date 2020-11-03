@@ -1,5 +1,6 @@
 import { compare, genSalt, hash } from 'bcrypt'
 import { sign, verify } from 'jsonwebtoken'
+
 import { config } from '../../config/settings'
 import { IUser } from '../models/User'
 

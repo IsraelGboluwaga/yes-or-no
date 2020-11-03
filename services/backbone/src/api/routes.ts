@@ -1,6 +1,7 @@
 import '../../setup/envConfig'
 
 import * as express from 'express'
+
 import { AuthController, UserController } from './controllers'
 const { authenticateUser } = AuthController
 const { register, login } = UserController

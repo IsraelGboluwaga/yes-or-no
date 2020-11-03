@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
-import { failure } from '../lib/response'
+import { NextFunction, Request, Response } from 'express'
+
 import { logger } from '../../config/winston'
+import { failure } from '../lib/response'
 import { User } from '../models'
 import { verifyToken } from '../services/auth.service'
 
