@@ -4,7 +4,7 @@ interface IQuestionOnly {
   game_id: string
   text: string
   answer: string
-  isAnswerCorrect: boolean
+  isAnswerCorrect?: boolean
 }
 
 interface IQuestionAttributes extends IQuestionOnly {

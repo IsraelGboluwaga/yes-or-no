@@ -70,7 +70,7 @@ const update = async ({ _id, ...rest }: any) => {
       attr.to_ask = attr.player_two
     }
   }
-  return Game.findOneAndUpdate({ _id }, { $set: { ...attr } }, { new: true })
+  return Game.findOneAndUpdate({ _id }, { ...attr }, { new: true })
 }
 
 export { createGame, getGame, update }
