@@ -6,7 +6,7 @@ import { logger } from './winston'
 const connectionString =
   !config.mongodb.username || !config.mongodb.password
     ? `mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}`
-    : `mongodb://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}`
+    : `mongodb+srv://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}/${config.mongodb.db}?retryWrites=true&w=majority`
 
 mongoose.Promise = global.Promise
 const mongo = () =>

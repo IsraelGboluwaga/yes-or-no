@@ -24,7 +24,7 @@ const createGame = async ({ req, to_ask, to_answer }: ICreateGameParams) => {
   const username = req.user.username
   const player_one = req.user._id
   if (!(to_ask || to_answer)) {
-    throw { message: 'You really have to decide if you will be asking or answering', httpCode: 422 }
+    throw { message: 'You really have to decide if you will be asking or answering', code: 422 }
   }
   const activePlayerOneGame = await Game.findOne({
     player_one,
