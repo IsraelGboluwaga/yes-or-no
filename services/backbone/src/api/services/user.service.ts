@@ -9,7 +9,6 @@ const addUser = async ({ username, password }: IUserOnly) => {
   if (password.length < 6) {
     throw { message: 'Password must be at least 6 characters long', code: 422 }
   }
-  logger.info(username)
   if (!isAlphanumeric(username)) {
     throw { message: 'Username can contain only letters and numbers', code: 422 }
   }
@@ -35,11 +34,11 @@ const loginUser = async ({
 }) => {
   const user: any = await fetchUser(username)
   if (!user) {
-    throw { message: 'You do not have an account, kindly create an account', httpCode: 404 }
+    throw { message: 'You do not have an account, kindly create an account', code: 404 }
   }
   const passwordsMatch: boolean = await comparePasswords({ password, hash: user.password })
   if (!passwordsMatch) {
-    throw { message: 'Invalid Password', httpCode: 401 }
+    throw { message: 'Invalid Password', code: 401 }
   }
   ;(req as any).user = user
   const token = generateToken({ _id: user._id, username: user.username, timestamp: Date.now() })

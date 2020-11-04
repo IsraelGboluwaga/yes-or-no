@@ -1,18 +1,10 @@
 version: "3"
 
 services:
-  mongo:
-    image: mongo
-    ports:
-      - "27017:27017"
-    container_name: backbone-db
-
   backbone:
     build: ./services/backbone
     ports: 
       - "3030:3030"
-    depends_on:
-      - mongo
     container_name: backbone
     volumes:
       - ./services/backbone:/app/backbone

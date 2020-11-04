@@ -12,6 +12,8 @@ interface IMongo {
 export const config = {
   mongodb: {
     db: process.env.DB_NAME || 'yes-or-no-local',
+    username: process.env.DB_USERNAME || 'israel',
+    password: process.env.DB_PASSWORD || 'fake',
     host: process.env.MONGO_HOST || 'localhost',
     port: process.env.MONGO_PORT || 27017,
     query_limit: 100,
