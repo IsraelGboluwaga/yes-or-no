@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from 'express'
-import { failure } from '../lib/response'
+import { NextFunction, Request, Response } from 'express'
+
 import { logger } from '../../config/winston'
+import { failure } from '../lib/response'
 import { User } from '../models'
 import { verifyToken } from '../services/auth.service'
 
@@ -16,7 +17,7 @@ const authenticateUser = async (req: Request, res: Response, next: NextFunction)
       return failure({ res, message: 'You do not have access to this resource', httpCode: 403 })
     }
     ;(req as any).user = user
-    next()
+    return next()
   } catch (err) {
     logger.error(err)
     return failure({

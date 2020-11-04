@@ -1,5 +1,6 @@
 import { compare, genSalt, hash } from 'bcrypt'
 import { sign, verify } from 'jsonwebtoken'
+
 import { config } from '../../config/settings'
 import { IUser } from '../models/User'
 
@@ -27,5 +28,13 @@ const generateToken = (userObject: any) => {
 const verifyToken = (token: string): IUser => {
   return verify(token, config.jwtSecret) as IUser
 }
+
+/**
+const isTokenExpired = (timestamp: number) => {
+  const tokenIssue = moment.utc(timestamp)
+  const now = moment.utc()
+  return Math.abs(tokenIssue.diff(now, 's')) > config.maxTimeBeforeExpiry
+}
+*/
 
 export { hashPassword, comparePasswords, generateToken, verifyToken }

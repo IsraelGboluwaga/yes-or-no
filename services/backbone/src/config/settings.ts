@@ -17,4 +17,5 @@ export const config = {
     query_limit: 100,
   } as IMongo,
   jwtSecret: JWT_SECRET || 'capri-s0on3',
+  maxTimeBeforeExpiry: 2 * 3600,
 }
