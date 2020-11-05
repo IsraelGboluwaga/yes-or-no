@@ -17,7 +17,6 @@ export class YesOrNo {
     this.server.use(bodyParser.urlencoded({ extended: true }))
     mongo()
 
-    // Cors
     this.server.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
       res.header('Access-Control-Allow-Origin', '*')
       res.header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS')
@@ -28,10 +27,8 @@ export class YesOrNo {
       next()
     })
 
-    // Setup routes
     this.routes()
 
-    // catch 404 and forward to error handler
     this.server.use(
       (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
         err.status = 404
