@@ -10,7 +10,7 @@ const { createQuestion, fetchQuestion, update } = QuestionService
 const askQuestion = async (req: Request, res: Response) => {
   const { game_id, text, answer }: IQuestionOnly = req.body
   try {
-    const data = await createQuestion({ game_id, text, answer })
+    const data = await createQuestion({ game_id, text, answer, userId: req.user._id })
     return success({ res, data, httpCode: 201 })
   } catch (err) {
     logger.error(err)

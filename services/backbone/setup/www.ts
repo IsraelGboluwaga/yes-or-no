@@ -4,8 +4,10 @@ import './envConfig'
 import * as rootPath from 'app-root-path'
 import * as fs from 'fs'
 import * as http from 'http'
+import io from 'socket.io'
 
 import { NODE_ENV, PORT } from '../src/api/lib/constants'
+import { socketEvents } from '../src/api/services/events.service'
 import { YesOrNo } from '../src/app'
 import { logger } from '../src/config/winston'
 
@@ -77,7 +79,10 @@ const app = api.app
 app.set('port', port)
 
 /** Create HTTP server. */
-const server = http.createServer(app)
+const server: http.Server = http.createServer(app)
+
+const io_ = io(server)
+io_.on('connection', socketEvents)
 
 server.listen(port)
 server.on('error', onError)

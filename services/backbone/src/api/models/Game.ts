@@ -7,6 +7,7 @@ interface IGameOnly {
   to_ask: string
   to_answer: string
   isActive: boolean
+  winner: string
 }
 
 interface IGameAttributes extends IGameOnly {
@@ -24,6 +25,7 @@ const GameSchema = new Schema(
     to_ask: { type: Schema.Types.ObjectId, ref: 'User' },
     to_answer: { type: Schema.Types.ObjectId, ref: 'User' },
     isActive: { type: Boolean, default: false },
+    winner: { type: Schema.Types.ObjectId, ref: 'User' },
   },
   { timestamps: true }
 )
