@@ -9,7 +9,6 @@ import { logger } from './config/winston'
 
 export class YesOrNo {
   readonly server: express.Application
-  private io: any
 
   public constructor() {
     this.server = express()
