@@ -58,14 +58,14 @@ api.interceptors.response.use(
           localStorage.removeItem('username')
           localStorage.removeItem('token')
           router.replace({
-            path: '/',
+            path: '/login',
             query: { redirect: router.currentRoute.fullPath },
           })
           break
         case 502:
           setTimeout(() => {
             router.replace({
-              path: '/',
+              path: '/login',
               query: {
                 redirect: router.currentRoute.fullPath,
               },
