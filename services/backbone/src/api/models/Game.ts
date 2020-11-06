@@ -4,9 +4,9 @@ interface IGameOnly {
   player_one: string
   player_two: string
   questions: string[]
-  to_ask: string
-  to_answer: string
-  isActive: boolean
+  to_ask: number
+  to_answer: number
+  is_active: boolean
   winner: string
 }
 
@@ -22,10 +22,10 @@ const GameSchema = new Schema(
     player_one: { type: Schema.Types.ObjectId, ref: 'User' },
     player_two: { type: Schema.Types.ObjectId, ref: 'User' },
     questions: { type: [Schema.Types.ObjectId], ref: 'Question' },
-    to_ask: { type: Schema.Types.ObjectId, ref: 'User' },
-    to_answer: { type: Schema.Types.ObjectId, ref: 'User' },
-    isActive: { type: Boolean, default: false },
-    winner: { type: Schema.Types.ObjectId, ref: 'User' },
+    to_ask: { type: Number, min: 1, max: 2, default: null },
+    to_answer: { type: Number, min: 1, max: 2, default: null },
+    is_active: { type: Boolean, default: false },
+    winner: { type: Number, min: 1, max: 2, default: null },
   },
   { timestamps: true }
 )

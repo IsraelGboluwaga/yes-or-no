@@ -1,42 +1,35 @@
 <template>
   <div>
-    <section>
-      <div class="container mt-5">
-        <div class="row">
-          <div class="col-md-12">
-            <ul class="list-group">
-              <li class="list-group-item">Name : {{ user.name }}</li>
-              <li class="list-group-item">Email : {{ user.email }}</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    <StartGame v-if="indicateGameStatus" v-on:start-game="startGame" />
   </div>
 </template>
 <script>
-import VueJwtDecode from "vue-jwt-decode";
+import StartGame from "../components/StartGame";
 export default {
+  name: "Home",
+  components: {
+    StartGame,
+  },
   data() {
     return {
-      user: {}
+      isGameStarted: false,
+      gameId: "",
+      game: {},
     };
   },
   methods: {
-    getUserDetails() {
-      let token = localStorage.getItem("jwt");
-      let decoded = VueJwtDecode.decode(token);
-      this.user = decoded;
+    indicateGameStatus() {
+      if (this.isGameStarted && this.gameId) {
+        return this.$router.push(`/game/${this.gameId}`);
+      }
+      return true;
     },
-    logUserOut() {
-      localStorage.removeItem("jwt");
-      this.$router.push("/");
-    }
+    startGame(data) {
+      this.isGameStarted = true;
+      this.gameId = data._id;
+      this.game = data;
+    },
   },
-
-  created() {
-    this.getUserDetails();
-  }
 };
 </script>
 

@@ -4,13 +4,10 @@ import { omitUndefined } from '../lib/helpers'
 import { Game } from '../models'
 import { IGame } from '../models/Game'
 import { IQuestionOnly, Question } from '../models/Question'
+import { getGame } from './game.service'
 
-interface ICreateQuestion extends IQuestionOnly {
-  userId: string
-}
-
-const createQuestion = async (args: ICreateQuestion) => {
-  const { game_id: gameId, text, answer, userId } = args
+const createQuestion = async (args: IQuestionOnly) => {
+  const { game_id: gameId, text, answer } = args
   const allowedAnswers = ['yes', 'no']
   if (!gameId) {
     throw { message: 'The game ID is required', code: 422 }
@@ -22,18 +19,15 @@ const createQuestion = async (args: ICreateQuestion) => {
     throw { message: 'Answer has to be yes or no', code: 422 }
   }
 
-  const game: IGame | null = await Game.findById(gameId).populate('to_ask')
+  const game = await getGame(gameId)
   if (!game) {
     throw { message: 'This game does not exist', code: 422 }
-  }
-  if (game.to_ask !== userId) {
-    throw { message: 'You are not eligible to ask the question', code: 422 }
   }
   if (game.winner) {
     throw { message: `Game is already won by ${game.winner}`, code: 409 }
   }
   if (game.questions.length >= 20) {
-    await game?.updateOne({ winner: game.to_ask })
+    await (game as IGame).updateOne({ winner: game.to_ask })
     throw { message: `Game is already won by ${(game.to_ask as any).username}`, code: 409 }
   }
   const question: any = await new Question({ ...args, answer: answer.toLowerCase() }).save()

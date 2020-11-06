@@ -61,16 +61,24 @@ export default {
     async registerUser() {
       try {
         const response = await this.$http.post("/user", this.register);
-        const token = response.data.data.token;
-        if (token) {
-          localStorage.setItem("x-auth-token", token);
-          this.$router.push("/");
-          swal("Success", "Registration successful", "success");
-        } else {
-          swal("Error", "Something Went Wrong", "error");
+        if (
+          !(
+            response ||
+            response.data ||
+            response.data.data ||
+            response.data.data.token
+          )
+        ) {
+          swal("Error", "Something went wrong. Kindly try in a bit.", "error");
         }
+        const token = response.data.data.token;
+        localStorage.setItem("x-auth-token", token);
+        localStorage.setItem("username", response.data.data.username);
+        localStorage.setItem("userId", response.data.data._id);
+        swal("Success", "Signup Successful", "success");
+        this.$router.push("/home");
       } catch (err) {
-        swal("Error", err.data.message || "Something Went Wrong", "error");
+        swal("Error", err.data.message || "Something went wrong", "error");
       }
     },
   },

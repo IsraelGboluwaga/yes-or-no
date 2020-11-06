@@ -2,7 +2,7 @@ import { Request } from 'express'
 import { isAlphanumeric } from 'validator'
 
 import { IUser, IUserOnly, User } from '../models/User'
-import { comparePasswords, generateToken, hashPassword } from './auth.service'
+import { comparePasswords, generateToken, hashPassword, ITokenObject } from './auth.service'
 
 const addUser = async ({ username, password }: IUserOnly) => {
   if (password.length < 6) {
@@ -18,7 +18,11 @@ const addUser = async ({ username, password }: IUserOnly) => {
   const newUser: IUser = new User({ username, password: await hashPassword({ password }) })
   const user = (await newUser.save()) as any
   delete (user as any).password
-  const token = generateToken({ _id: user._id, username: user.username, timestamp: Date.now() })
+  const token = generateToken({
+    _id: user._id,
+    username: user.username,
+    timestamp: Date.now(),
+  } as ITokenObject)
   return { ...user._doc, token }
 }
 
@@ -40,7 +44,11 @@ const loginUser = async ({
     throw { message: 'Invalid Password', code: 401 }
   }
   ;(req as any).user = user
-  const token = generateToken({ _id: user._id, username: user.username, timestamp: Date.now() })
+  const token = generateToken({
+    _id: user._id,
+    username: user.username,
+    timestamp: Date.now(),
+  } as ITokenObject)
   return { ...user._doc, token }
 }
 
