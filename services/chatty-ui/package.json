@@ -11,9 +11,11 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.4.1",
     "core-js": "^3.6.5",
+    "socket.io-client": "^2.3.1",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
     "vue-jwt-decode": "^0.1.0",
+    "vue-loading-overlay": "^3.4.2",
     "vue-router": "^3.2.0"
   },
   "devDependencies": {
@@ -22,8 +24,8 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint": "^7.12.1",
+    "eslint-plugin-vue": "^7.1.0",
     "sass": "^1.19.0",
     "sass-loader": "^8.0.0",
     "vue-template-compiler": "^2.6.11"

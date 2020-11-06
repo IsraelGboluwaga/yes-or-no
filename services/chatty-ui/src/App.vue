@@ -6,11 +6,11 @@
 </template>
 
 <script>
-import Header from './components/Header'
+import Header from "./components/Header";
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Header,
-  }
-}
+  },
+};
 </script>

@@ -1,8 +1,13 @@
 import { compare, genSalt, hash } from 'bcrypt'
 import { sign, verify } from 'jsonwebtoken'
+import moment from 'moment-timezone'
 
 import { config } from '../../config/settings'
 import { IUser } from '../models/User'
+
+export interface ITokenObject extends IUser {
+  timestamp: number
+}
 
 const hashPassword = async ({
   password,
@@ -21,20 +26,18 @@ const comparePasswords = async ({ password, hash }: { password: string; hash: st
   return isMatch
 }
 
-const generateToken = (userObject: any) => {
+const generateToken = (userObject: ITokenObject) => {
   return sign(userObject, config.jwtSecret)
 }
 
-const verifyToken = (token: string): IUser => {
-  return verify(token, config.jwtSecret) as IUser
+const verifyToken = (token: string): ITokenObject => {
+  return verify(token, config.jwtSecret) as ITokenObject
 }
 
-/**
 const isTokenExpired = (timestamp: number) => {
   const tokenIssue = moment.utc(timestamp)
   const now = moment.utc()
   return Math.abs(tokenIssue.diff(now, 's')) > config.maxTimeBeforeExpiry
 }
-*/
 
-export { hashPassword, comparePasswords, generateToken, verifyToken }
+export { hashPassword, comparePasswords, generateToken, isTokenExpired, verifyToken }

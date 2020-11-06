@@ -7,7 +7,7 @@
 import Login from "@/components/auth/Login";
 export default {
   components: {
-    Login
-  }
+    Login,
+  },
 };
 </script>
