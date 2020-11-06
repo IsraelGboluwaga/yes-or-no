@@ -27,7 +27,7 @@
           />
           <p>
             Already have an account??
-            <router-link to="/">Click here</router-link>
+            <router-link to="/home">Click here</router-link>
 
             <!-- Sign in button -->
             <center>

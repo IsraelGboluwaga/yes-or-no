@@ -14,3 +14,4 @@ Make sure you have already installed both [Docker Engine](https://docs.docker.co
 ```sh
 ➜ docker-compose up -d
 ```
+Then, type `localhost` on your browser and enter.

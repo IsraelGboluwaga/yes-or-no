@@ -41,7 +41,7 @@ const loginUser = async ({
   }
   const passwordsMatch: boolean = await comparePasswords({ password, hash: user.password })
   if (!passwordsMatch) {
-    throw { message: 'Invalid Password', code: 401 }
+    throw { message: 'Incorrect Password', code: 401 }
   }
   ;(req as any).user = user
   const token = generateToken({

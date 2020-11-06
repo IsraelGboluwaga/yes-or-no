@@ -9,6 +9,14 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: "/",
+    name: "Login_",
+    component: Login,
+    meta: {
+      guest: true,
+    },
+  },
+  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -25,10 +33,11 @@ const routes = [
     },
   },
   {
-    path: "/",
+    path: "/home",
     name: "Home",
     component: Home,
     meta: {
+      guest: false,
       requiresAuth: true,
     },
   },
@@ -51,7 +60,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!localStorage.getItem("x-auth-token")) {
-      return next({ path: "/" })
+      return next({ path: "/login" })
     } else {
       return next()
     }

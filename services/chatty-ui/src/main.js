@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import axios from 'axios'
-import 'bootstrap/dist/css/bootstrap.css'
+import Vue from "vue"
+import App from "./App.vue"
+import router from "./router"
+import axios from "axios"
+import "bootstrap/dist/css/bootstrap.css"
 
-const baseURL = 'http://localhost:3030'
+const baseURL = "http://localhost:3030"
 const api = axios.create({
   baseURL: baseURL,
   headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
+    Accept: "application/json",
+    "Content-Type": "application/json",
   },
 })
 
@@ -19,9 +19,9 @@ Vue.config.productionTip = false
 
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('x-auth-token')
+    const token = localStorage.getItem("x-auth-token")
     if (token) {
-      config.headers.common['x-auth-token'] = token
+      config.headers.common["x-auth-token"] = token
     }
     return config
   },
@@ -49,23 +49,23 @@ api.interceptors.response.use(
           break
         case 403:
           router.replace({
-            path: '/login',
+            path: "/login",
             query: { redirect: router.currentRoute.fullPath },
           })
           break
         case 440:
-          localStorage.removeItem('userId')
-          localStorage.removeItem('username')
-          localStorage.removeItem('token')
+          localStorage.removeItem("userId")
+          localStorage.removeItem("username")
+          localStorage.removeItem("token")
           router.replace({
-            path: '/login',
+            path: "/login",
             query: { redirect: router.currentRoute.fullPath },
           })
           break
         case 502:
           setTimeout(() => {
             router.replace({
-              path: '/login',
+              path: "/login",
               query: {
                 redirect: router.currentRoute.fullPath,
               },
@@ -80,4 +80,4 @@ api.interceptors.response.use(
 new Vue({
   router,
   render: (h) => h(App),
-}).$mount('#app')
+}).$mount("#app")

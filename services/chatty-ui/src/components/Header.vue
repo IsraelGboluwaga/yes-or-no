@@ -4,13 +4,11 @@
       <span class="navbar-text"> YES OR NO </span>
       <div class="flex-end" v-if="isInSession">
         <div class="d-flex username">
-          <router-link to="/home" class="mr-3 logout">
+          <router-link to="/home" class="mr-3 header-btn">
             {{ username }}
           </router-link>
           <span class="mr-3"> | </span>
-          <router-link to="/" class="logout" @click="logoutUser">
-            Logout
-          </router-link>
+          <button class="header-btn logout" @click="logout">Logout</button>
         </div>
       </div>
     </nav>
@@ -29,8 +27,7 @@ export default {
     isInSession() {
       return !!localStorage.getItem("x-auth-token");
     },
-    logoutUser() {
-      // does not work yet
+    logout() {
       localStorage.removeItem("x-auth-token");
       localStorage.removeItem("userId");
       localStorage.removeItem("username");
@@ -44,14 +41,18 @@ export default {
 </script>
 
 <style scoped>
-.logout {
+.header-btn {
   color: #777777;
 }
-.logout:hover {
+.header-btn:hover {
   color: #ffffff;
   text-decoration: none;
 }
 .username {
   color: #999999;
+}
+.logout {
+  border: none;
+  background: inherit;
 }
 </style>
