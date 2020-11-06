@@ -4,7 +4,7 @@ interface IQuestionOnly {
   game_id: string
   text: string
   answer: string
-  isAnswerCorrect?: boolean
+  is_answer_correct?: boolean
 }
 
 interface IQuestionAttributes extends IQuestionOnly {
@@ -19,7 +19,7 @@ const QuestionSchema = new Schema(
     game_id: { type: Schema.Types.ObjectId, ref: 'Game' },
     text: String,
     answer: String,
-    isAnswerCorrect: Boolean,
+    is_answer_correct: Boolean,
   },
   { timestamps: true }
 )

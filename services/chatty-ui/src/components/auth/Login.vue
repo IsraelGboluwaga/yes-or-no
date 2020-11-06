@@ -34,7 +34,11 @@
 
           <!-- Sign in button -->
           <center>
-            <button class="btn btn-primary btn-block w-75 my-4" type="submit" @click="loginUser">
+            <button
+              class="btn btn-primary btn-block w-75 my-4"
+              type="submit"
+              @click="loginUser"
+            >
               Login
             </button>
           </center>
@@ -61,15 +65,24 @@ export default {
     async loginUser() {
       try {
         const response = await this.$http.post("/user/login", this.login);
-        const token = response.data.data.token;
-        alert(token)
-        localStorage.setItem("x-auth-token", token);
-        if (token) {
-          swal("Success", "Login Successful", "success");
-          this.$router.push("/home");
+        if (
+          !(
+            response ||
+            response.data ||
+            response.data.data ||
+            response.data.data.token
+          )
+        ) {
+          swal("Error", "Something went wrong. Kindly try in a bit.", "error");
         }
+        const token = response.data.data.token;
+        localStorage.setItem("x-auth-token", token);
+        localStorage.setItem("username", response.data.data.username);
+        localStorage.setItem("userId", response.data.data._id);
+        swal("Success", "Login Successful", "success");
+        this.$router.push("/home");
       } catch (err) {
-        swal("Error", err.data.message || "Something Went Wrong", "error");
+        swal("Error", err.data.message || "Something went wrong", "error");
       }
     },
   },

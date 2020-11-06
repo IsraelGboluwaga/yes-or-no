@@ -1,18 +1,19 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Register from '../views/Register.vue'
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Home from "../views/Home.vue"
+import Login from "../views/Login.vue"
+import Register from "../views/Register.vue"
+import Game from "../views/Game.vue"
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
     meta: {
-      guest: true
+      guest: true,
     },
   },
   {
@@ -20,36 +21,43 @@ const routes = [
     name: "Register",
     component: Register,
     meta: {
-      guest: true
+      guest: true,
     },
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home,
     meta: {
-      requiresAuth: true
-    }
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/game/:gameId",
+    name: "Game",
+    component: Game,
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   routes,
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (localStorage.getItem('x-auth-token') == null) {
-      next({
-        path: "/"
-      });
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!localStorage.getItem("x-auth-token")) {
+      return next({ path: "/" })
     } else {
-      next();
+      return next()
     }
   } else {
-    next();
+    return next()
   }
-});
+})
 
 export default router

@@ -82,7 +82,9 @@ app.set('port', port)
 const server: http.Server = http.createServer(app)
 
 const io_ = io(server)
-io_.on('connection', socketEvents)
+io_.on('connection', (socket) => {
+  socketEvents(socket, io_)
+})
 
 server.listen(port)
 server.on('error', onError)
