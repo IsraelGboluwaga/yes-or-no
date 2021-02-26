@@ -3,6 +3,7 @@ import '../../setup/envConfig'
 import * as express from 'express'
 
 import { AuthController, GameController, QuestionController, UserController } from './controllers'
+
 const { authenticateUser } = AuthController
 const { register, login } = UserController
 const { createGameInstance, fetchGame, updateGameProperty } = GameController
